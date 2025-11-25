@@ -1,0 +1,80 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Models and data (uncomment if you don't want to track these)
+# *.h5
+# *.pkl
+# *.pth
+# *.model
+# data/
+# datasets/
+
+# Logs
+*.log
+logs/
+
+# Flask/Django
+instance/
+.webassets-cache
+
+# Node (if you have a frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+
+# Frontend build
+frontend/build/
+frontend/dist/
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# OS
+Thumbs.db
+.DS_Store

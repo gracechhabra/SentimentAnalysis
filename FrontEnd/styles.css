@@ -1,0 +1,383 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* Main Content */
+.main-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-btn {
+    padding: 15px 30px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.tab-btn:hover {
+    color: #667eea;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Input Section */
+.input-section {
+    margin-bottom: 20px;
+}
+
+.input-section label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 600;
+}
+
+.input-field,
+.textarea-field {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.textarea-field {
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Analyze Button */
+.analyze-btn {
+    width: 100%;
+    padding: 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 15px;
+}
+
+.analyze-btn:hover {
+    background: #5568d3;
+}
+
+.analyze-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.loading {
+    display: inline-block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Examples */
+.examples {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.examples p {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.example-btn {
+    padding: 8px 15px;
+    margin: 5px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9em;
+}
+
+.example-btn:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+/* Error Message */
+.error-message {
+    padding: 15px;
+    background: #f8d7da;
+    border: 2px solid #f5c6cb;
+    border-radius: 10px;
+    color: #721c24;
+    margin: 20px 0;
+}
+
+/* Results */
+.results {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.results h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Sentiment Badge */
+.sentiment-badge {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+}
+
+.sentiment-badge.positive {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border-left: 5px solid #28a745;
+}
+
+.sentiment-badge.neutral {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+    border-left: 5px solid #ffc107;
+}
+
+.sentiment-badge.negative {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border-left: 5px solid #dc3545;
+}
+
+.sentiment-icon {
+    font-size: 3em;
+}
+
+.sentiment-info h3 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.sentiment-info p {
+    font-size: 1.1em;
+    opacity: 0.8;
+}
+
+/* Probabilities */
+.probabilities {
+    margin-bottom: 30px;
+}
+
+.probabilities h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.probability-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.prob-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 60px;
+    gap: 10px;
+    align-items: center;
+}
+
+.prob-item label {
+    font-weight: 600;
+    color: #666;
+}
+
+.prob-bar {
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.prob-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.prob-fill.positive {
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.prob-fill.neutral {
+    background: linear-gradient(90deg, #ffc107, #fd7e14);
+}
+
+.prob-fill.negative {
+    background: linear-gradient(90deg, #dc3545, #c82333);
+}
+
+.prob-item span {
+    text-align: right;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Summary Section */
+.summary-section {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.summary-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.summary-section p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.word-count {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 10px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+    }
+
+    .prob-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .sentiment-badge {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results {
+    animation: fadeIn 0.5s ease;
+}

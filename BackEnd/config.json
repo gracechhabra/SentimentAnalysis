@@ -1,0 +1,1 @@
+{"vocab_size": 15000, "max_len": 90, "embedding_dim": 200, "label_mapping": {"0": "negative", "1": "neutral", "2": "positive"}}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Sentiment Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📈 Financial Sentiment Analysis</h1>
+            <p>Analyze the sentiment of financial news and articles</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('url')">Analyze URL</button>
+                <button class="tab-btn" onclick="switchTab('text')">Analyze Text</button>
+            </div>
+
+            <!-- URL Tab -->
+            <div id="url-tab" class="tab-content active">
+                <div class="input-section">
+                    <label for="url-input">Enter Financial News URL:</label>
+                    <input 
+                        type="text" 
+                        id="url-input" 
+                        placeholder="https://www.reuters.com/markets/..."
+                        class="input-field"
+                    >
+                    <button onclick="analyzeURL()" class="analyze-btn">
+                        <span id="url-btn-text">🔍 Analyze</span>
+                        <span id="url-loading" class="loading hidden">⏳ Analyzing...</span>
+                    </button>
+                </div>
+
+                <!-- Example URLs -->
+            </div>
+
+            <!-- Text Tab -->
+            <div id="text-tab" class="tab-content">
+                <div class="input-section">
+                    <label for="text-input">Enter Financial Text:</label>
+                    <textarea 
+                        id="text-input" 
+                        placeholder="Paste your financial news article or text here..."
+                        class="textarea-field"
+                        rows="8"
+                    ></textarea>
+                    <button onclick="analyzeText()" class="analyze-btn">
+                        <span id="text-btn-text">🔍 Analyze</span>
+                        <span id="text-loading" class="loading hidden">⏳ Analyzing...</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="error-message hidden"></div>
+
+            <!-- Results Section -->
+            <div id="results" class="results hidden">
+                <h2>Analysis Results</h2>
+                
+                <!-- Sentiment Badge -->
+                <div id="sentiment-badge" class="sentiment-badge">
+                    <div class="sentiment-icon" id="sentiment-icon">📊</div>
+                    <div class="sentiment-info">
+                        <h3 id="sentiment-label">ANALYZING...</h3>
+                        <p id="sentiment-confidence">Confidence: --</p>
+                    </div>
+                </div>
+
+                <!-- Probabilities -->
+                <div class="probabilities">
+                    <h3>Probability Distribution</h3>
+                    <div class="probability-bars">
+                        <div class="prob-item">
+                            <label>Positive</label>
+                            <div class="prob-bar">
+                                <div id="prob-positive" class="prob-fill positive" style="width: 0%"></div>
+                            </div>
+                            <span id="prob-positive-text">0%</span>
+                        </div>
+                        <div class="prob-item">
+                            <label>Neutral</label>
+                            <div class="prob-bar">
+                                <div id="prob-neutral" class="prob-fill neutral" style="width: 0%"></div>
+                            </div>
+                            <span id="prob-neutral-text">0%</span>
+                        </div>
+                        <div class="prob-item">
+                            <label>Negative</label>
+                            <div class="prob-bar">
+                                <div id="prob-negative" class="prob-fill negative" style="width: 0%"></div>
+                            </div>
+                            <span id="prob-negative-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div id="summary-section" class="summary-section hidden">
+                    <h3>Text Summary</h3>
+                    <p id="summary-text"></p>
+                    <p class="word-count">Word Count: <span id="word-count">0</span></p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by LSTM Neural Network with GloVe Embeddings</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
