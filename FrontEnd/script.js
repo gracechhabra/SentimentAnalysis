@@ -61,6 +61,9 @@ function hideResults() {
 
 // Display Results
 function displayResults(data) {
+    console.log("=== displayResults called ===");
+    console.log("Data received:", data);
+    console.log("Results div:", document.getElementById('results'));
     const resultsDiv = document.getElementById('results');
     const sentimentBadge = document.getElementById('sentiment-badge');
     const sentimentIcon = document.getElementById('sentiment-icon');

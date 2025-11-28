@@ -70,6 +70,10 @@ yarn-error.log*
 frontend/build/
 frontend/dist/
 
+
+#backend model
+BackEnd/pegasus_summarizer
+
 # Testing
 .coverage
 .pytest_cache/
