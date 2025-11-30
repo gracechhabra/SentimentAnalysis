@@ -6,7 +6,8 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from transformers import PegasusForConditionalGeneration, PegasusTokenizer
+#from transformers import PegasusForConditionalGeneration, PegasusTokenizer
+from transformers import BartTokenizer, BartForConditionalGeneration
 import torch
 import pickle
 import json
@@ -84,15 +85,18 @@ except Exception as e:
 print("\n[2/2] Loading Summarization Model (Pegasus)...")
 
 try:
-    model_name = "google/pegasus-cnn_dailymail"
+    #model_name = "google/pegasus-cnn_dailymail"
+    model_name = "sshleifer/distilbart-cnn-12-6"
+    pegasus_tokenizer = BartTokenizer.from_pretrained(model_name)
+    pegasus_model = BartForConditionalGeneration.from_pretrained(model_name)
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     
     print(f"   Device: {device}")
     print("   Note: First run downloads ~2GB (takes 5-10 min)")
     print("   Downloading model...")
     
-    pegasus_tokenizer = PegasusTokenizer.from_pretrained(model_name)
-    pegasus_model = PegasusForConditionalGeneration.from_pretrained(model_name).to(device)
+    #pegasus_tokenizer = PegasusTokenizer.from_pretrained(model_name)
+    #pegasus_model = PegasusForConditionalGeneration.from_pretrained(model_name).to(device)
     
     SUMMARIZATION_LOADED = True
     print("   ✅ Pegasus model loaded")
