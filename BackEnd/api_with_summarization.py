@@ -157,22 +157,81 @@ def extract_main_content(soup):
 
 def fetch_url_content(url):
     """Fetch and extract clean text content from URL"""
+    import time
+    import re
+    
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.9',
         }
-        response = requests.get(url, headers=headers, timeout=15)
-        response.raise_for_status()
+        
+        print(f"   Fetching: {url}")
+        time.sleep(1)
+        
+        response = requests.get(url, headers=headers, timeout=30)
+        print(f"   Status: {response.status_code}")
+        
+        if response.status_code != 200:
+            raise Exception(f"HTTP {response.status_code}")
         
         soup = BeautifulSoup(response.content, 'html.parser')
-        text = extract_main_content(soup)
         
-        if not text:
-            raise Exception("Could not extract text from webpage")
+        # Remove unwanted elements
+        for element in soup(["script", "style", "nav", "footer", "header", "aside", 
+                             "iframe", "noscript", "svg", "form", "button"]):
+            element.decompose()
         
+        # Method 1: Try specific selectors
+        text = None
+        selectors = [
+            'article',
+            '.article-content', 
+            '.article-body',
+            '.story-content',
+            '.c-text',
+            '[role="main"]',
+            'main',
+            '#main-content'
+        ]
+        
+        for selector in selectors:
+            content = soup.select_one(selector)
+            if content:
+                paragraphs = content.find_all('p')
+                if paragraphs and len(paragraphs) > 0:
+                    text = ' '.join([p.get_text().strip() for p in paragraphs if len(p.get_text().strip()) > 20])
+                    if text and len(text) > 100:
+                        print(f"   ✅ Found content using: {selector}")
+                        break
+        
+        # Method 2: Fallback - get ALL paragraphs from entire page
+        if not text or len(text) < 100:
+            print("   ⚠️  Using fallback: extracting all paragraphs")
+            all_paragraphs = soup.find_all('p')
+            text = ' '.join([p.get_text().strip() for p in all_paragraphs if len(p.get_text().strip()) > 20])
+        
+        # Method 3: Last resort - get all text from body
+        if not text or len(text) < 100:
+            print("   ⚠️  Last resort: using body text")
+            body = soup.find('body')
+            if body:
+                text = body.get_text()
+        
+        if not text or len(text) < 50:
+            raise Exception("Could not extract meaningful text from webpage")
+        
+        # Clean text
+        text = re.sub(r'\s+', ' ', text)
+        text = re.sub(r'\n+', ' ', text)
+        text = text.strip()
+        
+        print(f"   ✅ Extracted {len(text)} characters")
         return text[:5000]
         
     except Exception as e:
+        print(f"   ❌ Error: {str(e)}")
         raise Exception(f"Error fetching URL: {str(e)}")
 
 
