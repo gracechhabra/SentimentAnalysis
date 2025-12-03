@@ -42,8 +42,8 @@ python api_with_summarization.py
 ```
 
 ### 5. Run the Frontend
-    1. Download the live server on VS code
-    2. Go to index.html in FronEnd folder and click Go Live. This will open a website
+  1. Download the live server on VS code
+  2. Go to index.html in FronEnd folder and click Go Live. This will open a website
 
 ## Usage
 Once both the API server and frontend are running, open your browser to `http://localhost:3000` (or the appropriate port).
@@ -55,3 +55,4 @@ Once both the API server and frontend are running, open your browser to `http://
 
 
 Note: The peagsus model will take 5-10 minutes to download on the first run. 
+
